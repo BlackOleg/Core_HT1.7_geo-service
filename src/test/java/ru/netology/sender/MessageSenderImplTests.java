@@ -21,7 +21,7 @@ public class MessageSenderImplTests {
 
     @ParameterizedTest
     @MethodSource("senderParameters")
-    public void test_get_MessageSender(Country countrySetup, Location locationSetup, String expected) {
+    public void testMessageSender(Country countrySetup, Location locationSetup, String expected) {
         LocalizationService localizationService = Mockito.mock(LocalizationServiceImpl.class);
         Mockito.when(localizationService.locale(Mockito.any()))
                 .thenReturn(String.valueOf(countrySetup));
@@ -33,9 +33,6 @@ public class MessageSenderImplTests {
         headers.put(MessageSenderImpl.IP_ADDRESS_HEADER, "172.123.12.19");
         String result = messageSender.send(headers);
         Assertions.assertEquals(expected, result);
-        headers = null;
-        geoService = null;
-        localizationService = null;
     }
 
     private static Stream<Arguments> senderParameters() {

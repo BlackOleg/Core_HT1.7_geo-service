@@ -15,18 +15,18 @@ public class GeoServiceImplTests {
     public void testByIp(String ip, Location expected) {
         GeoService geoService = new GeoServiceImpl();
         Location result = geoService.byIp(ip);
-        String resultsb = new StringBuilder().append(result.getCountry())
-                .append(result.getCity())
-                .append(result.getStreet())
-                .append(result.getBuiling())
-                .toString();
-        String expectedsb = new StringBuilder().append(expected.getCountry())
-                .append(expected.getCity())
-                .append(expected.getStreet())
-                .append(expected.getBuiling())
-                .toString();
+//        String resultsb = new StringBuilder().append(result.getCountry())
+//                .append(result.getCity())
+//                .append(result.getStreet())
+//                .append(result.getBuiling())
+//                .toString();
+//        String expectedsb = new StringBuilder().append(expected.getCountry())
+//                .append(expected.getCity())
+//                .append(expected.getStreet())
+//                .append(expected.getBuiling())
+//                .toString();
         //Assert.assertTrue(new ReflectionEquals(expected, excludeFields).matches(actual));
-        Assertions.assertEquals(resultsb, expectedsb);
+        Assertions.assertEquals(result, expected);
 
     }
 

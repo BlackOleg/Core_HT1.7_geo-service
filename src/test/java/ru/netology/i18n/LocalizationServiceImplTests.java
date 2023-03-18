@@ -20,8 +20,7 @@ public class LocalizationServiceImplTests {
     public void testLocale(Country country, String expected) {
         LocalizationService localizationService = new LocalizationServiceImpl();
         String result = localizationService.locale(country);
-        Assertions.assertEquals(result,expected);
-        localizationService = null;
+        Assertions.assertEquals(result, expected);
     }
 
     private static Stream<Arguments> localeParameters() {
