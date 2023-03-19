@@ -1,6 +1,8 @@
 package ru.netology.geo;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -12,11 +14,22 @@ import java.util.stream.Stream;
 import static org.junit.Assert.assertEquals;
 
 public class GeoServiceImplTests {
-
+    static GeoService geoService;
+    static Location result;
+    @BeforeAll
+    public static void before() {
+        System.out.println("GeoService tests started..");
+    }
+    @AfterAll
+    public static void after() {
+        geoService = null;
+        result = null;
+        System.out.println("GeoService tests completed");
+    }
     @ParameterizedTest
     @MethodSource("ipParameters")
     public void testByIp(String ip, Location expected) {
-        GeoService geoService = new GeoServiceImpl();
+        geoService = new GeoServiceImpl();
         Location result = geoService.byIp(ip);
         Assertions.assertAll(() -> {
                     assertEquals(expected.getCountry(), result.getCountry());

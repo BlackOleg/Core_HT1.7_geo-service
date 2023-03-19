@@ -14,11 +14,20 @@ import ru.netology.geo.GeoServiceImpl;
 import java.util.stream.Stream;
 
 public class LocalizationServiceImplTests {
-
+    static LocalizationService localizationService;
+    @BeforeAll
+    public static void before() {
+        System.out.println("LocalizationService tests started..");
+    }
+    @AfterAll
+    public static void after() {
+        localizationService = null;
+        System.out.println("LocalizationService tests completed");
+    }
     @ParameterizedTest
     @MethodSource("localeParameters")
     public void testLocale(Country country, String expected) {
-        LocalizationService localizationService = new LocalizationServiceImpl();
+        localizationService = new LocalizationServiceImpl();
         String result = localizationService.locale(country);
         Assertions.assertEquals(result, expected);
     }
