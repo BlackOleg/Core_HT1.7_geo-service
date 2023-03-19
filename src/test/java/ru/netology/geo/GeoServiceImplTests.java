@@ -6,7 +6,10 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import ru.netology.entity.Country;
 import ru.netology.entity.Location;
+
 import java.util.stream.Stream;
+
+import static org.junit.Assert.assertEquals;
 
 public class GeoServiceImplTests {
 
@@ -15,19 +18,13 @@ public class GeoServiceImplTests {
     public void testByIp(String ip, Location expected) {
         GeoService geoService = new GeoServiceImpl();
         Location result = geoService.byIp(ip);
-//        String resultsb = new StringBuilder().append(result.getCountry())
-//                .append(result.getCity())
-//                .append(result.getStreet())
-//                .append(result.getBuiling())
-//                .toString();
-//        String expectedsb = new StringBuilder().append(expected.getCountry())
-//                .append(expected.getCity())
-//                .append(expected.getStreet())
-//                .append(expected.getBuiling())
-//                .toString();
-        //Assert.assertTrue(new ReflectionEquals(expected, excludeFields).matches(actual));
-        Assertions.assertEquals(result, expected);
-
+        Assertions.assertAll(() -> {
+                    assertEquals(expected.getCountry(), result.getCountry());
+                    assertEquals(expected.getCity(), result.getCity());
+                    assertEquals(expected.getBuiling(), result.getBuiling());
+                    assertEquals(expected.getStreet(), result.getStreet());
+                }
+        );
     }
 
     private static Stream<Arguments> ipParameters() {
